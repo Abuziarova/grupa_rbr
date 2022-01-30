@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('posts');
+        return redirect()->route('posts');
     }
 
     public function list(){
