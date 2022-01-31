@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         Commands\PostCreate::class,
+        Commands\CommentCreate::class,
     ];
     /**
      * Define the application's command schedule.
@@ -19,10 +20,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('taks:create')->everyMinute();
 
         $schedule->command('post:create')
         ->daily();
+        $schedule->command('comment:create')->cron('*/36 * * * *');
     }
 
     /**

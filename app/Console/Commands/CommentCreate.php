@@ -3,24 +3,24 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-
+use App\Models\Post;
 use App\Http\Controllers\ApiServiceController;
 
-class PostCreate extends Command
+class CommentCreate extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'post:create';
+    protected $signature = 'comment:create';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Creating daily post';
+    protected $description = 'Creating comment to random post every 36 minutes';
 
     /**
      * Create a new command instance.
@@ -39,13 +39,10 @@ class PostCreate extends Command
      */
     public function handle()
     {
+        $post_ids = Post::select('id')->get();
+        $random_id = $post_ids[rand(1, count($post_ids))];
         $apiService = new ApiServiceController();
-        $faker = \Faker\Factory::create();
-        $title = $faker->word;
-        $content = $faker->paragraph;
-        $author = $faker->name();
-        $apiService->postCreate($title, $content, $author);
-        
-        $this->info('Successfully created daily post');
+        $apiService->commentCreate($random_id->id, 'tak', 'automat');
+        $this->info('Successfully created comment');
     }
 }
