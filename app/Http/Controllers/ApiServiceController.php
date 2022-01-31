@@ -14,7 +14,6 @@ class ApiServiceController extends Controller
 
     public function postCreate($title, $content, $author)
     {
- 
         $response =$this->client->post('http://localhost:8001/api/posts/', [
             'form_params' => [
                 'title' => $title,
