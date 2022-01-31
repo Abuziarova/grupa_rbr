@@ -11,6 +11,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\PostCreate::class,
         Commands\CommentCreate::class,
+        Commands\AddUser::class,
     ];
     /**
      * Define the application's command schedule.
